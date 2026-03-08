@@ -1,0 +1,58 @@
+{
+  "roles": [
+    {
+      "id": "cloud-engineer",
+      "title": "Cloud Engineer",
+      "description": "Design, build, and maintain scalable cloud infrastructure on AWS/Azure/GCP. Collaborate with development teams to automate deployments and ensure reliability.",
+      "required_skills": ["AWS", "Azure", "Terraform", "Docker", "Kubernetes", "Python", "CI/CD", "Linux", "Networking", "IAM"],
+      "nice_to_have": ["GCP", "Ansible", "Prometheus", "Go", "Helm"],
+      "avg_salary": "$120,000 - $160,000",
+      "common_certs": ["AWS Solutions Architect", "Google Cloud Professional", "CKA"]
+    },
+    {
+      "id": "cybersecurity-analyst",
+      "title": "Cybersecurity Analyst",
+      "description": "Monitor, detect, and respond to security threats. Conduct vulnerability assessments and implement security controls to protect systems and data.",
+      "required_skills": ["SIEM", "Threat Analysis", "Incident Response", "Network Security", "Python", "Linux", "Firewall", "IDS/IPS", "OWASP", "Penetration Testing"],
+      "nice_to_have": ["Splunk", "CrowdStrike", "Wireshark", "Metasploit", "Zero Trust"],
+      "avg_salary": "$100,000 - $140,000",
+      "common_certs": ["CompTIA Security+", "CEH", "CISSP", "OSCP"]
+    },
+    {
+      "id": "backend-engineer",
+      "title": "Backend Software Engineer",
+      "description": "Build and maintain scalable backend services and APIs. Work closely with frontend teams and data engineers to deliver reliable, high-performance systems.",
+      "required_skills": ["Python", "REST APIs", "SQL", "Git", "Docker", "Microservices", "Redis", "PostgreSQL", "Testing", "System Design"],
+      "nice_to_have": ["Go", "Kafka", "GraphQL", "Elasticsearch", "gRPC"],
+      "avg_salary": "$115,000 - $155,000",
+      "common_certs": []
+    },
+    {
+      "id": "data-engineer",
+      "title": "Data Engineer",
+      "description": "Design and maintain data pipelines, warehouses, and ETL processes to support analytics and ML workloads at scale.",
+      "required_skills": ["Python", "SQL", "Apache Spark", "Airflow", "dbt", "AWS", "Data Modeling", "ETL", "PostgreSQL", "Kafka"],
+      "nice_to_have": ["Scala", "Snowflake", "BigQuery", "Databricks", "Terraform"],
+      "avg_salary": "$118,000 - $155,000",
+      "common_certs": ["AWS Data Analytics", "Google Professional Data Engineer", "Databricks Certified"]
+    },
+    {
+      "id": "devops-engineer",
+      "title": "DevOps Engineer",
+      "description": "Bridge development and operations by automating deployments, managing infrastructure as code, and maintaining observability across distributed systems.",
+      "required_skills": ["Docker", "Kubernetes", "CI/CD", "Terraform", "Linux", "Python", "AWS", "Monitoring", "Git", "Bash"],
+      "nice_to_have": ["Helm", "Istio", "Prometheus", "Grafana", "Ansible"],
+      "avg_salary": "$120,000 - $155,000",
+      "common_certs": ["CKA", "AWS DevOps Professional", "HashiCorp Terraform Associate"]
+    },
+    {
+      "id": "ml-engineer",
+      "title": "Machine Learning Engineer",
+      "description": "Build, train, and deploy ML models in production. Collaborate with data scientists to bring models from research to scalable, reliable systems.",
+      "required_skills": ["Python", "PyTorch", "TensorFlow", "Machine Learning", "SQL", "Docker", "MLOps", "AWS", "Statistics", "Feature Engineering"],
+      "nice_to_have": ["Spark", "Kubeflow", "Ray", "LangChain", "CUDA"],
+      "avg_salary": "$130,000 - $175,000",
+      "common_certs": ["AWS Machine Learning Specialty", "TensorFlow Developer Certificate", "GCP Professional ML Engineer"]
+    }
+  ]
+}
