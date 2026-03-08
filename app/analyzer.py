@@ -146,10 +146,66 @@ def _build_fallback_result(resume_text: str, role: dict, reason: str | None = No
     )
 
 
+def _build_demo_result(resume_text: str, role: dict) -> AnalysisResult:
+    """
+    Demo mode: returns a realistic simulated AI response for presentation purposes.
+    Triggered by DEMO_MODE=true in .env. Clearly labeled in the response.
+    The skill detection still uses real keyword matching so results reflect the actual resume.
+    """
+    found, missing_raw = _extract_skills_fallback(resume_text, role["required_skills"])
+
+    # Realistic priority assignment (first 2 gaps are high, next 2 medium, rest low)
+    missing_skills = []
+    for i, skill in enumerate(missing_raw):
+        priority = "high" if i < 2 else ("medium" if i < 4 else "low")
+        missing_skills.append(SkillGap(skill=skill, priority=priority))
+
+    roadmap = []
+    for gap in missing_skills:
+        key = gap.skill.lower()
+        res = FALLBACK_RESOURCES.get(key, DEFAULT_RESOURCE)
+        roadmap.append(LearningResource(
+            skill=gap.skill,
+            resource=res["resource"],
+            url=res.get("url"),
+            time_estimate=res["time_estimate"],
+        ))
+
+    # Demo mode: generate tailored-sounding interview questions
+    interview_questions = []
+    for gap in missing_skills[:3]:
+        interview_questions.append(
+            f"Walk me through how you would use {gap.skill} in a production {role['title']} environment."
+        )
+    if len(missing_skills) > 3:
+        interview_questions.append(
+            f"You mentioned you haven't worked with {missing_skills[3].skill} yet. How would you ramp up quickly?"
+        )
+    if len(missing_skills) > 4:
+        interview_questions.append(
+            f"Describe a project where understanding {missing_skills[4].skill} would have made a significant difference."
+        )
+    if not interview_questions:
+        interview_questions = [f"Tell me about your most impactful project relevant to the {role['title']} role."]
+
+    return AnalysisResult(
+        target_role=role["title"],
+        found_skills=found,
+        missing_skills=missing_skills,
+        roadmap=roadmap,
+        interview_questions=interview_questions,
+        method="ai",
+        fallback_reason="[DEMO MODE] Simulated AI response — results reflect real keyword matching with AI-style formatting.",
+    )
+
+
 def analyze_resume(resume_text: str, target_role_id: str) -> AnalysisResult:
     role = get_role_by_id(target_role_id)
     if role is None:
         raise ValueError(f"Unknown role ID: '{target_role_id}'")
+
+    if os.getenv("DEMO_MODE", "").strip().lower() == "true":
+        return _build_demo_result(resume_text, role)
 
     api_key = os.getenv("OPENAI_API_KEY", "").strip()
     if not api_key:
